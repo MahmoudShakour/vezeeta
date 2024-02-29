@@ -10,6 +10,6 @@ namespace Core.Models
     {
         public string Id { get; set; }=string.Empty;
         public ApplicationUser User { get; set; }
-        public Gender Gender { get; set; }
+        public string Gender { get; set; }=string.Empty;
     }
 }
