@@ -11,5 +11,6 @@ namespace Core.Models
         public string DoctorId { get; set; }=string.Empty;
         public Doctor Doctor { get; set; }
         public DateTime Date { get; set; }
+        public Booking? Booking { get; set; }
     }
 }
