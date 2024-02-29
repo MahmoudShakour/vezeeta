@@ -12,5 +12,6 @@ namespace Core.Models
         public ApplicationUser User { get; set; }
         public string Gender { get; set; }=string.Empty;
         public List<Booking> Bookings{ get; set; }=[];
+        public List<PatientDiscount> patientDiscounts { get; set; }=[];
     }
 }

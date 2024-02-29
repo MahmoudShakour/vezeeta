@@ -26,6 +26,7 @@ namespace Infrastructure.Database
         public DbSet<Appointment> Appointments { get; set; }
         public DbSet<Booking> Bookings { get; set; }
         public DbSet<Discount> Discounts { get; set; }
+        public DbSet<PatientDiscount> patientDiscounts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -37,6 +38,7 @@ namespace Infrastructure.Database
             new AppointmentConfiguration().Configure(builder.Entity<Appointment>());
             new BookingConfiguration().Configure(builder.Entity<Booking>());
             new DiscountConfiguration().Configure(builder.Entity<Discount>());
+            new PatientDiscountConfiguration().Configure(builder.Entity<PatientDiscount>());
         }
 
 
