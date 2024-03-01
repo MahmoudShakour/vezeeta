@@ -28,6 +28,7 @@ namespace Infrastructure.Database
         public DbSet<Discount> Discounts { get; set; }
         public DbSet<PatientDiscount> PatientDiscounts { get; set; }
         public DbSet<Specialization> Specializations { get; set; }
+        public DbSet<DoctorSpecialization> DoctorSpecializations { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -41,6 +42,7 @@ namespace Infrastructure.Database
             new DiscountConfiguration().Configure(builder.Entity<Discount>());
             new PatientDiscountConfiguration().Configure(builder.Entity<PatientDiscount>());
             new SpecializationConfiguration().Configure(builder.Entity<Specialization>());
+            new DoctorSpecializationConfiguration().Configure(builder.Entity<DoctorSpecialization>());
         }
 
 
