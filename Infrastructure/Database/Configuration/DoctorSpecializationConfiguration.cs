@@ -12,14 +12,18 @@ namespace Infrastructure.Database.Configuration
         public void Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<DoctorSpecialization> builder)
         {
             builder
-                .HasKey(ds => new { ds.SpecializationId, ds.DoctorId });
+                .HasKey(ds => ds.Id);
 
             builder
-                .HasOne(ds=>ds.Doctor)
-                .WithMany(ds => ds.Specializations);
-            
+                .HasIndex(ds => new { ds.SpecializationId, ds.DoctorId })
+                .IsUnique();
+
             builder
-                .HasOne(ds=>ds.Specialization)
+                .HasOne(ds => ds.Doctor)
+                .WithMany(ds => ds.Specializations);
+
+            builder
+                .HasOne(ds => ds.Specialization)
                 .WithMany(ds => ds.Doctors);
         }
     }

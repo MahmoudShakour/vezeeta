@@ -7,6 +7,7 @@ namespace Core.Models
 {
     public class DoctorSpecialization
     {
+        public int Id { get; set; }
         public string DoctorId { get; set; }=string.Empty;
         public int SpecializationId { get; set; }
         public Doctor Doctor { get; set; }

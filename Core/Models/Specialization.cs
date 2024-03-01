@@ -10,6 +10,6 @@ namespace Core.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }=string.Empty;
-        public List<DoctorSpecialization> Doctors { get; set; }
+        public List<DoctorSpecialization> Doctors { get; set; }=[];
     }
 }

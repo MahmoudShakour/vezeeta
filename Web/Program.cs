@@ -17,6 +17,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddScoped<IJWTHelper, JWTHelper>();
 builder.Services.AddScoped<ITokenInfo, TokenInfo>();
 builder.Services.AddScoped<IAuthRepo, AuthRepo>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<ISpecializationRepo, SpecializationRepo>();
 
 builder.Services.AddDbContextPool<ApplicationDbContext>(
     options =>
