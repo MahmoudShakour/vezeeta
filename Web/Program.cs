@@ -1,4 +1,6 @@
+using Core.Models;
 using Infrastructure.Database;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,6 +14,14 @@ builder.Services.AddDbContextPool<ApplicationDbContext>(
             b => b.MigrationsAssembly("Infrastructure")
         )
 );
+
+// add auth roles
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+{
+    options.Password.RequireLowercase = true;
+    options.Password.RequireDigit = true;
+    options.Password.RequireUppercase = true;
+}).AddEntityFrameworkStores<ApplicationDbContext>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -28,6 +38,6 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-
+DbSeeding.Seed(app).GetAwaiter();
 
 app.Run();
