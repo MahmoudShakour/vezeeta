@@ -39,6 +39,7 @@ namespace Infrastructure.Database.Configuration
             
             builder
                 .Property(b=>b.Status)
+                .HasConversion<string>()
                 .IsRequired();
             
             builder
