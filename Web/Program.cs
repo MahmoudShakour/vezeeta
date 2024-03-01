@@ -1,11 +1,19 @@
+using System.IdentityModel.Tokens.Jwt;
+using Application.Interfaces.Helpers;
+using Application.Interfaces.Repos;
 using Core.Models;
 using Infrastructure.Database;
+using Infrastructure.Helpers;
+using Infrastructure.Repos;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddScoped<IJWTHelper,JWTHelper>();
+builder.Services.AddScoped<ITokenInfo,TokenInfo>();
+builder.Services.AddScoped<IAuthRepo,AuthRepo>();
 
 builder.Services.AddDbContextPool<ApplicationDbContext>(
     options =>
