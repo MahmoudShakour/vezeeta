@@ -38,7 +38,7 @@ namespace Infrastructure.Database.Configuration
                 .IsRequired();
             
             builder
-                .Property(b=>b.BookingStatus)
+                .Property(b=>b.Status)
                 .IsRequired();
             
             builder

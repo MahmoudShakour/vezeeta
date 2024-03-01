@@ -17,12 +17,12 @@ namespace Infrastructure.Database.Configuration
             
             builder
                 .HasOne(pd=>pd.Patient)
-                .WithMany(p=>p.patientDiscounts)
+                .WithMany(p=>p.PatientDiscounts)
                 .OnDelete(DeleteBehavior.Restrict);
             
             builder
                 .HasOne(pd=>pd.Discount)
-                .WithMany(d=>d.patientDiscounts)
+                .WithMany(d=>d.PatientDiscounts)
                 .OnDelete(DeleteBehavior.Restrict);
                 
             builder

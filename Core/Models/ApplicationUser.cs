@@ -9,6 +9,6 @@ namespace Core.Models
 {
     public class ApplicationUser:IdentityUser
     {
-        public UserRole Role { get; set; }
+
     }
 }

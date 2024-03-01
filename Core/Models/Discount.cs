@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Core.Enums;
 
 namespace Core.Models
 {
@@ -12,7 +13,7 @@ namespace Core.Models
         public string DoctorId { get; set; } = string.Empty;
         public Doctor Doctor { get; set; }
         public string Code { get; set; } = string.Empty;
-        public string Status { get; set; } = string.Empty;
-        public List<PatientDiscount> patientDiscounts { get; set; } = [];
+        public DiscountStatus Status { get; set; } 
+        public List<PatientDiscount> PatientDiscounts { get; set; } = [];
     }
 }

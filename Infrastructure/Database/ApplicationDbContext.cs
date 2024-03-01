@@ -26,7 +26,7 @@ namespace Infrastructure.Database
         public DbSet<Appointment> Appointments { get; set; }
         public DbSet<Booking> Bookings { get; set; }
         public DbSet<Discount> Discounts { get; set; }
-        public DbSet<PatientDiscount> patientDiscounts { get; set; }
+        public DbSet<PatientDiscount> PatientDiscounts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
