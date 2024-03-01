@@ -22,7 +22,7 @@ namespace Infrastructure.Database.Data
 
             if (!context.Specializations.Any())
             {
-                foreach (Specialization specialization in Enum.GetValues(typeof(Specialization)))
+                foreach (SpecializationEnum specialization in Enum.GetValues(typeof(SpecializationEnum)))
                 {
                     await context.Specializations.AddAsync(
                         new Core.Models.Specialization { Name = specialization.ToString() }

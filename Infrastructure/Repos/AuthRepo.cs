@@ -26,31 +26,36 @@ namespace Infrastructure.Repos
             _jWTHelper = jWTHelper;
         }
 
-        public async Task<bool> CreateDoctor(Doctor doctor, string password)
+        public async Task<bool> CreateDoctor(ApplicationUser user, string password)
         {
-            var createdUser = await _userManager.CreateAsync(doctor.User, password);
+
+            var createdUser = await _userManager.CreateAsync(user, password);
             if (!createdUser.Succeeded)
+            {
                 return false;
+            }
 
-            var result = await _userManager.AddToRoleAsync(doctor.User, "Doctor");
+            var result = await _userManager.AddToRoleAsync(user, "Doctor");
             if (!result.Succeeded)
+            {
                 return false;
+            }
 
-            await _context.Doctors.AddAsync(doctor);
+            await _context.Doctors.AddAsync(user.Doctor!);
             return true;
         }
 
-        public async Task<bool> CreatePatient(Patient patient, string password)
+        public async Task<bool> CreatePatient(ApplicationUser user, string password)
         {
-            var createdUser = await _userManager.CreateAsync(patient.User, password);
+            var createdUser = await _userManager.CreateAsync(user, password);
             if (!createdUser.Succeeded)
                 return false;
 
-            var result = await _userManager.AddToRoleAsync(patient.User, "Patient");
+            var result = await _userManager.AddToRoleAsync(user, "Patient");
             if (!result.Succeeded)
                 return false;
 
-            await _context.Patients.AddAsync(patient);
+            await _context.Patients.AddAsync(user.Patient!);
             return true;
         }
 

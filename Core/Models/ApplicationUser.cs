@@ -9,6 +9,7 @@ namespace Core.Models
 {
     public class ApplicationUser:IdentityUser
     {
-
+        public Doctor? Doctor { get; set; }
+        public Patient? Patient { get; set; }
     }
 }

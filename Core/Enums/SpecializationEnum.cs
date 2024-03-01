@@ -1,6 +1,6 @@
 namespace Core.Enums
 {
-    public enum Specialization
+    public enum SpecializationEnum
     {
         Dermatology,
         Dentistry,
