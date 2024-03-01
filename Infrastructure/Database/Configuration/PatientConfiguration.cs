@@ -17,7 +17,7 @@ namespace Infrastructure.Configuration
 
             builder
                 .HasOne(d => d.User)
-                .WithOne()
+                .WithOne(u=>u.Patient)
                 .HasForeignKey<Patient>(p => p.Id)
                 .OnDelete(DeleteBehavior.Restrict);
 

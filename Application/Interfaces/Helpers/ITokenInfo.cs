@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Application.Dtos.User
+namespace Application.Interfaces.Helpers
 {
-    public class empty
+    public interface ITokenInfo
     {
         
     }

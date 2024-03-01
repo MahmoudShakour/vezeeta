@@ -107,7 +107,7 @@ namespace Infrastructure.Migrations
                     b.HasIndex("DoctorId", "Date")
                         .IsUnique();
 
-                    b.ToTable("Appointments");
+                    b.ToTable("Appointments", (string)null);
                 });
 
             modelBuilder.Entity("Core.Models.Booking", b =>
@@ -139,7 +139,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("PatientId");
 
-                    b.ToTable("Bookings");
+                    b.ToTable("Bookings", (string)null);
                 });
 
             modelBuilder.Entity("Core.Models.Discount", b =>
@@ -170,7 +170,7 @@ namespace Infrastructure.Migrations
                     b.HasIndex("DoctorId", "Code")
                         .IsUnique();
 
-                    b.ToTable("Discounts");
+                    b.ToTable("Discounts", (string)null);
                 });
 
             modelBuilder.Entity("Core.Models.Doctor", b =>
@@ -187,7 +187,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Doctors");
+                    b.ToTable("Doctors", (string)null);
                 });
 
             modelBuilder.Entity("Core.Models.Patient", b =>
@@ -201,7 +201,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Patients");
+                    b.ToTable("Patients", (string)null);
                 });
 
             modelBuilder.Entity("Core.Models.PatientDiscount", b =>
@@ -219,7 +219,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("DiscountId");
 
-                    b.ToTable("PatientDiscounts");
+                    b.ToTable("PatientDiscounts", (string)null);
                 });
 
             modelBuilder.Entity("Core.Models.Specialization", b =>
@@ -239,7 +239,7 @@ namespace Infrastructure.Migrations
                     b.HasIndex("Name")
                         .IsUnique();
 
-                    b.ToTable("Specializations");
+                    b.ToTable("Specializations", (string)null);
                 });
 
             modelBuilder.Entity("DoctorSpecialization", b =>
@@ -254,7 +254,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("SpecializationsId");
 
-                    b.ToTable("DoctorSpecialization");
+                    b.ToTable("DoctorSpecialization", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
