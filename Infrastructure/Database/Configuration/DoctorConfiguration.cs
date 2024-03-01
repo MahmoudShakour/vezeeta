@@ -27,10 +27,7 @@ namespace Infrastructure.Configuration
 
             builder
                 .Property(d => d.Gender)
-                .IsRequired();
-
-            builder
-                .Property(d => d.Specialization)
+                .HasConversion<string>()
                 .IsRequired();
         }
     }

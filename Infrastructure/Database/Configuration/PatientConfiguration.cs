@@ -23,6 +23,7 @@ namespace Infrastructure.Configuration
 
             builder
                 .Property(p => p.Gender)
+                .HasConversion<string>()
                 .IsRequired();
         }
     }

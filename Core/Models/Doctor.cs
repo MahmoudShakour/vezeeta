@@ -12,8 +12,8 @@ namespace Core.Models
         public string Id { get; set; }=string.Empty;
         public ApplicationUser User { get; set; }
         public int Fees { get; set; }
-        public string Specialization { get; set; }=string.Empty;
-        public string Gender { get; set; }
+        public List<Specialization> Specializations { get; set; }=[];
+        public Gender Gender { get; set; }
         public List<Appointment> Appointments { get; set; }=[];
         public List<Discount> Discounts { get; set; }=[];
     }
