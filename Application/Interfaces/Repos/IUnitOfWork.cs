@@ -7,8 +7,12 @@ namespace Application.Interfaces.Repos
 {
     public interface IUnitOfWork : IDisposable
     {
-        ISpecializationRepo Specializations { get; }
+        IAppointmentRepo Appointments { get; }
+        IBookingRepo Bookings { get; }
+        IDiscountRepo Discounts { get; }
         IDoctorSpecializationRepo DoctorSpecializations { get; }
+        IPatientDiscountRepo PatientDiscounts { get; }
+        ISpecializationRepo Specializations { get; }
 
         Task Complete();
     }
