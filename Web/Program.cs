@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Web.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -110,6 +111,8 @@ app.UseHttpsRedirection();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.UseMiddleware<GlobalErrorHandlerMiddleware>();
 
 app.MapControllers();
 
