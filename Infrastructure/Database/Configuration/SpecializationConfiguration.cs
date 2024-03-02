@@ -23,9 +23,6 @@ namespace Infrastructure.Database.Configuration
                 .HasIndex(s => s.Name)
                 .IsUnique();
             
-            builder
-                .HasMany(s => s.Doctors)
-                .WithMany(d=>d.Specializations);
         }
     }
 }
