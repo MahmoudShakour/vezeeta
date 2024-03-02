@@ -18,19 +18,13 @@ namespace Infrastructure.Repos
 
         public async Task AddDoctorSpecializations(string doctorId, List<Specialization> specializations)
         {
-            System.Console.WriteLine(specializations.Count);
-            System.Console.WriteLine(specializations.Count);
-            System.Console.WriteLine(specializations.Count);
-            System.Console.WriteLine(specializations.Count);
             foreach (var specialization in specializations)
             {
-                var doctorSpecification=new DoctorSpecialization { DoctorId = doctorId, SpecializationId = specialization.Id };
-                System.Console.WriteLine(doctorSpecification.DoctorId);
-                System.Console.WriteLine(doctorSpecification.SpecializationId);
-                await _context.DoctorSpecializations.AddAsync(
-                    doctorSpecification
-                );
+                var doctorSpecification = new DoctorSpecialization { DoctorId = doctorId, SpecializationId = specialization.Id };
+
+                await _context.DoctorSpecializations.AddAsync(doctorSpecification);
                 await _context.SaveChangesAsync();
+                
             }
         }
     }
