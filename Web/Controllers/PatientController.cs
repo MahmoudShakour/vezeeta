@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Application.Interfaces.Helpers;
 using Application.Interfaces.Repos;
+using Application.Mappers;
 using Infrastructure.Helpers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -104,8 +105,8 @@ namespace Web.Controllers
             }
             int skip = pagination.GetSkip();
             int take = pagination.GetTake();
-            var patients = await _unitOfWork.Patients.GetAll(skip, take);
-
+            var patients = await _unitOfWork.Patients.GetAll(skip, take, ["User"]);
+            var patientsDto = patients.Select(p => p.ToPatientDto());
             return
                 Ok(
                     new
@@ -115,7 +116,7 @@ namespace Web.Controllers
                         message = "patients returned successfully",
                         data = new
                         {
-                            patients
+                            patients=patientsDto
                         }
                     }
                 );
@@ -153,7 +154,7 @@ namespace Web.Controllers
                     );
             }
 
-            var patient = await _unitOfWork.Patients.GetById(id);
+            var patient = await _unitOfWork.Patients.FindOne(p=>p.Id==id,["User"]);
 
             if (patient == null)
             {
@@ -168,6 +169,7 @@ namespace Web.Controllers
                     );
             }
 
+            var patientDto = patient.ToPatientDto();
             return
                 Ok(
                     new
@@ -177,7 +179,7 @@ namespace Web.Controllers
                         message = "patient returned successfully",
                         data = new
                         {
-                            patient
+                            patient=patientDto
                         }
                     }
                 );

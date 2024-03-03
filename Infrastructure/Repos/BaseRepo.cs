@@ -49,6 +49,17 @@ namespace Infrastructure.Repos
             return await _context.Set<T>().FirstOrDefaultAsync(predicate);
         }
 
+        public async Task<T?> FindOne(Expression<Func<T, bool>> predicate, string[] includes)
+        {
+            IQueryable<T> query = _context.Set<T>();
+
+            if (includes != null)
+                foreach (var include in includes)
+                    query = query.Include(include);
+
+            return await query.FirstOrDefaultAsync(predicate);
+        }
+
         public async Task<List<T>> GetAll()
         {
             return await _context.Set<T>().ToListAsync();
@@ -59,22 +70,24 @@ namespace Infrastructure.Repos
             return await _context.Set<T>().Skip(skip).Take(take).ToListAsync();
         }
 
-        public async Task<List<T>> GetAll(int skip, int take,string[] includes)
+        public async Task<List<T>> GetAll(int skip, int take, string[] includes)
         {
-            IQueryable<T> query= _context.Set<T>();
+            IQueryable<T> query = _context.Set<T>();
 
-            foreach (string include in includes){
-                query.Include(include);
+            foreach (string include in includes)
+            {
+                query = query.Include(include);
             }
 
             return await query.Skip(skip).Take(take).ToListAsync();
         }
 
-        public async Task<List<T>> GetAll(int skip, int take,Expression<Func<T,bool>> predicate,string[] includes)
+        public async Task<List<T>> GetAll(int skip, int take, Expression<Func<T, bool>> predicate, string[] includes)
         {
-            IQueryable<T> query= _context.Set<T>();
+            IQueryable<T> query = _context.Set<T>();
 
-            foreach (string include in includes){
+            foreach (string include in includes)
+            {
                 query.Include(include);
             }
 
