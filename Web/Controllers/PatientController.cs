@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Web.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/patients")]
     public class PatientController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -28,8 +28,6 @@ namespace Web.Controllers
         [HttpGet("/count")]
         public async Task<IActionResult> Count()
         {
-
-
             if (_currentUser == null)
             {
                 return
