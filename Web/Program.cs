@@ -1,4 +1,5 @@
 using System.IdentityModel.Tokens.Jwt;
+using System.Text.Json.Serialization;
 using Application.Interfaces.Helpers;
 using Application.Interfaces.Repos;
 using Core.Models;
@@ -41,7 +42,7 @@ builder.Services
     .AddControllers()
     .AddJsonOptions(options =>
     {
-        options.JsonSerializerOptions.ReferenceHandler = null;
+        options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
     });
 
 builder.Services
@@ -119,3 +120,5 @@ app.MapControllers();
 DbSeeding.Seed(app).GetAwaiter();
 
 app.Run();
+
+

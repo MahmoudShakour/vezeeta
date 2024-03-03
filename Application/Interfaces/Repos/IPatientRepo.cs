@@ -9,6 +9,5 @@ namespace Application.Interfaces
 {
     public interface IPatientRepo:IBaseRepo<Patient,string>
     {
-        
     }
 }

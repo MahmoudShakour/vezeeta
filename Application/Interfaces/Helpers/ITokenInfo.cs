@@ -7,6 +7,7 @@ namespace Application.Interfaces.Helpers
 {
     public interface ITokenInfo
     {
-        
+        public string Id { get; set; }
+        public string Role { get; set; }
     }
 }

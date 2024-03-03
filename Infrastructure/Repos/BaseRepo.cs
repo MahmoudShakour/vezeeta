@@ -17,6 +17,17 @@ namespace Infrastructure.Repos
         {
             _context = context;
         }
+
+        public async Task<int> Count(Expression<Func<T, bool>> predicate)
+        {
+            return await _context.Set<T>().CountAsync(predicate);
+        }
+
+        public async Task<int> Count()
+        {
+            return await _context.Set<T>().CountAsync();
+        }
+
         public async Task<T> Create(T entity)
         {
             await _context.Set<T>().AddAsync(entity);
@@ -38,9 +49,49 @@ namespace Infrastructure.Repos
             return await _context.Set<T>().FirstOrDefaultAsync(predicate);
         }
 
-        public Task<List<T>> GetAll()
+        public async Task<T?> FindOne(Expression<Func<T, bool>> predicate, string[] includes)
         {
-            return _context.Set<T>().ToListAsync();
+            IQueryable<T> query = _context.Set<T>();
+
+            if (includes != null)
+                foreach (var include in includes)
+                    query = query.Include(include);
+
+            return await query.FirstOrDefaultAsync(predicate);
+        }
+
+        public async Task<List<T>> GetAll()
+        {
+            return await _context.Set<T>().ToListAsync();
+        }
+
+        public async Task<List<T>> GetAll(int skip, int take)
+        {
+            return await _context.Set<T>().Skip(skip).Take(take).ToListAsync();
+        }
+
+        public async Task<List<T>> GetAll(int skip, int take, string[] includes)
+        {
+            IQueryable<T> query = _context.Set<T>();
+
+            foreach (string include in includes)
+            {
+                query = query.Include(include);
+            }
+
+            return await query.Skip(skip).Take(take).ToListAsync();
+        }
+
+        public async Task<List<T>> GetAll(int skip, int take, Expression<Func<T, bool>> predicate, string[] includes)
+        {
+            IQueryable<T> query = _context.Set<T>();
+
+            foreach (string include in includes)
+            {
+                query.Include(include);
+            }
+
+            return await query.Where(predicate).ToListAsync();
         }
 
         public async Task<T?> GetById(TId id)
