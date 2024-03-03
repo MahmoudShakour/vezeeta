@@ -24,7 +24,7 @@ namespace Web.Controllers
             _currentUser = jwtHelper.DecodeToken();
         }
 
-        [HttpGet("/count")]
+        [HttpGet("count")]
         public async Task<IActionResult> Count()
         {
             var doctorsCount = await _unitOfWork.Doctors.Count();
@@ -43,7 +43,7 @@ namespace Web.Controllers
                 );
         }
 
-        [HttpGet("/top")]
+        [HttpGet("top")]
         public async Task<IActionResult> GetTop([FromQuery] int numberOfDoctors)
         {
             // TODO
@@ -136,7 +136,7 @@ namespace Web.Controllers
 
             var doctor = updateDoctorDto.ToDoctor(_currentUser.Id);
             var updatedDoctor = await _unitOfWork.Doctors.Update(doctor);
-
+            await _unitOfWork.Complete();
             if (updatedDoctor == null)
             {
                 Console.WriteLine("doctor with current user id should have been in the database");
@@ -153,6 +153,7 @@ namespace Web.Controllers
                     );
             }
 
+            var doctorDto = updatedDoctor.ToDoctorDto();
             return
                 Ok(
                     new
@@ -162,11 +163,12 @@ namespace Web.Controllers
                         message = "your profile is updated successfully",
                         data = new
                         {
-                            updatedDoctor
+                            doctorDto
                         }
                     }
                 );
 
         }
+
     }
 }

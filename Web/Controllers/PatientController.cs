@@ -25,7 +25,7 @@ namespace Web.Controllers
         }
 
         [Authorize]
-        [HttpGet("/count")]
+        [HttpGet("count")]
         public async Task<IActionResult> Count()
         {
             if (_currentUser == null)
@@ -119,7 +119,6 @@ namespace Web.Controllers
                     }
                 );
         }
-
 
         [Authorize]
         [HttpGet("{id}")]

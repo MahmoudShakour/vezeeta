@@ -31,7 +31,6 @@ namespace Application.Mappers
                 Gender = Enum.Parse<Gender>(updateDoctorDto.Gender),
                 User = new ApplicationUser
                 {
-                    UserName = updateDoctorDto.Username,
                     PhoneNumber = updateDoctorDto.PhoneNumber,
                 }
             };

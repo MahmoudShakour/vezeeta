@@ -9,7 +9,6 @@ namespace Application.Dtos.Doctor
     {
         public int Fees { get; set; }
         public string Gender { get; set; }=string.Empty;
-        public string Username { get; set; } = string.Empty;
         public string PhoneNumber { get; set; } = string.Empty;
     }
 }

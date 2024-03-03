@@ -24,7 +24,6 @@ namespace Infrastructure.Repos
 
             doctorToUpdate.Fees = doctor.Fees;
             doctorToUpdate.Gender = doctor.Gender;
-            doctorToUpdate.User.UserName = doctor.User.UserName;
             doctorToUpdate.User.PhoneNumber = doctor.User.PhoneNumber;
 
             return doctorToUpdate;
