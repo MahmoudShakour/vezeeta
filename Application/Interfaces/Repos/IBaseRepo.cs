@@ -14,5 +14,7 @@ namespace Application.Interfaces.Repos
         Task<T> Create(T entity);
         Task<List<T>> FindAll(Expression<Func<T, bool>> predicate);
         Task<T?> FindOne(Expression<Func<T, bool>> predicate);
+        Task<int> Count(Expression<Func<T, bool>> predicate);
+        Task<int> Count();
     }
 }

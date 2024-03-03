@@ -17,6 +17,17 @@ namespace Infrastructure.Repos
         {
             _context = context;
         }
+
+        public async Task<int> Count(Expression<Func<T, bool>> predicate)
+        {
+            return await _context.Set<T>().CountAsync(predicate);
+        }
+
+        public async Task<int> Count()
+        {
+            return await _context.Set<T>().CountAsync();
+        }
+
         public async Task<T> Create(T entity)
         {
             await _context.Set<T>().AddAsync(entity);

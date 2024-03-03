@@ -13,6 +13,8 @@ namespace Application.Interfaces.Repos
         IDoctorSpecializationRepo DoctorSpecializations { get; }
         IPatientDiscountRepo PatientDiscounts { get; }
         ISpecializationRepo Specializations { get; }
+        IPatientRepo Patients { get; }
+        IDoctorRepo Doctors { get; }
 
         Task Complete();
     }
