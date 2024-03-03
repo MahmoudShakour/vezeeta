@@ -49,9 +49,36 @@ namespace Infrastructure.Repos
             return await _context.Set<T>().FirstOrDefaultAsync(predicate);
         }
 
-        public Task<List<T>> GetAll()
+        public async Task<List<T>> GetAll()
         {
-            return _context.Set<T>().ToListAsync();
+            return await _context.Set<T>().ToListAsync();
+        }
+
+        public async Task<List<T>> GetAll(int skip, int take)
+        {
+            return await _context.Set<T>().Skip(skip).Take(take).ToListAsync();
+        }
+
+        public async Task<List<T>> GetAll(int skip, int take,string[] includes)
+        {
+            IQueryable<T> query= _context.Set<T>();
+
+            foreach (string include in includes){
+                query.Include(include);
+            }
+
+            return await query.Skip(skip).Take(take).ToListAsync();
+        }
+
+        public async Task<List<T>> GetAll(int skip, int take,Expression<Func<T,bool>> predicate,string[] includes)
+        {
+            IQueryable<T> query= _context.Set<T>();
+
+            foreach (string include in includes){
+                query.Include(include);
+            }
+
+            return await query.Where(predicate).ToListAsync();
         }
 
         public async Task<T?> GetById(TId id)

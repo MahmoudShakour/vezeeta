@@ -10,6 +10,7 @@ namespace Application.Interfaces.Repos
     {
         Task<T?> GetById(TId id);
         Task<List<T>> GetAll();
+        Task<List<T>> GetAll(int skip,int take);
         void Delete(T entity);
         Task<T> Create(T entity);
         Task<List<T>> FindAll(Expression<Func<T, bool>> predicate);
