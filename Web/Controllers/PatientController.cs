@@ -114,7 +114,7 @@ namespace Web.Controllers
                         message = "patients returned successfully",
                         data = new
                         {
-                            patients=patientsDto
+                            patients = patientsDto
                         }
                     }
                 );
@@ -151,7 +151,7 @@ namespace Web.Controllers
                     );
             }
 
-            var patient = await _unitOfWork.Patients.FindOne(p=>p.Id==id,["User"]);
+            var patient = await _unitOfWork.Patients.FindOne(p => p.Id == id, ["User"]);
 
             if (patient == null)
             {
@@ -176,7 +176,7 @@ namespace Web.Controllers
                         message = "patient returned successfully",
                         data = new
                         {
-                            patient=patientDto
+                            patient = patientDto
                         }
                     }
                 );

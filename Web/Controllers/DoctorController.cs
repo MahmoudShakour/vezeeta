@@ -170,5 +170,42 @@ namespace Web.Controllers
 
         }
 
+        [HttpGet("{id}/appointments")]
+        public async Task<IActionResult> GetAppointments([FromQuery] Pagination pagination, [FromRoute] string id)
+        {
+            var doctor = await _unitOfWork.Doctors.GetById(id);
+            if (doctor == null)
+            {
+                return
+                    NotFound(
+                        new
+                        {
+                            success = false,
+                            StatusCode = 404,
+                            message = "doctor is not found"
+                        }
+                    );
+            }
+
+            int take = pagination.GetTake();
+            int skip = pagination.GetSkip();
+            var appointments = await _unitOfWork.Appointments.GetAll(skip, take, ["Doctor.User", "Booking"]);
+            var appointmentsDto = appointments.Select(a => a.ToAppointmentDto());
+
+            return
+                Ok(
+                    new
+                    {
+                        success = true,
+                        StatusCode = 200,
+                        message = "doctor appointments returned successfully",
+                        data = new
+                        {
+                            appointments = appointmentsDto
+                        }
+                    }
+                );
+        }
+
     }
 }
