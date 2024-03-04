@@ -189,7 +189,7 @@ namespace Web.Controllers
 
             int take = pagination.GetTake();
             int skip = pagination.GetSkip();
-            var appointments = await _unitOfWork.Appointments.GetAll(skip, take, ["Doctor.User", "Booking"]);
+            var appointments = await _unitOfWork.Appointments.GetAll(skip, take, ["Doctor.User", "Booking.Patient.User"]);
             var appointmentsDto = appointments.Select(a => a.ToAppointmentDto());
 
             return
