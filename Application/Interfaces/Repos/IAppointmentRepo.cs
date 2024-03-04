@@ -8,6 +8,6 @@ namespace Application.Interfaces.Repos
 {
     public interface IAppointmentRepo:IBaseRepo<Appointment,int>
     {
-        
+        Task<Appointment?> Update(Appointment appointment);
     }
 }
