@@ -11,9 +11,9 @@ namespace Core.Models
         public int Id { get; set; }
         public int AppointmentId { get; set; }
         public Appointment Appointment { get; set; }
-        public string PatientId { get; set; }=string.Empty;
+        public string PatientId { get; set; } = string.Empty;
         public Patient Patient { get; set; }
-        public BookingStatus Status { get; set; } 
-        public DateTime CreatedAt { get; set; }=DateTime.Now;
+        public BookingStatus Status { get; set; } = BookingStatus.Pending;
+        public DateTime CreatedAt { get; set; } = DateTime.Now;
     }
 }
