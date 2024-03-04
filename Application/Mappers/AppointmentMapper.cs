@@ -19,7 +19,7 @@ namespace Application.Mappers
                     Doctor = appointment.Doctor.ToDoctorDto(),
                     Date = appointment.Date,
                     IsBooked = appointment.Booking != null,
-                    Patient = appointment.Booking?.Patient.ToPatientDto()!,
+                    Patient = appointment.Booking?.Patient?.ToPatientDto()!,
                 };
             }
 
