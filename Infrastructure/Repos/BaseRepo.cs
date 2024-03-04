@@ -88,7 +88,7 @@ namespace Infrastructure.Repos
 
             foreach (string include in includes)
             {
-                query.Include(include);
+                query = query.Include(include);
             }
 
             return await query.Where(predicate).ToListAsync();

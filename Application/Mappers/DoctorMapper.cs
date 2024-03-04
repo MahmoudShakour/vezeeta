@@ -35,5 +35,19 @@ namespace Application.Mappers
                 }
             };
         }
+
+        public static DoctorDto ToDoctorDto(this DoctorSpecialization doctorSpecialization)
+        {
+            return new DoctorDto
+            {
+                Id = doctorSpecialization.DoctorId,
+                Fees = doctorSpecialization.Doctor.Fees,
+                Gender = doctorSpecialization.Doctor.Gender.ToString(),
+                PhoneNumber = doctorSpecialization.Doctor.User.PhoneNumber!,
+                Username = doctorSpecialization.Doctor.User.UserName!,
+                Email = doctorSpecialization.Doctor.User.Email!,
+            };
+        }
+    
     }
 }
