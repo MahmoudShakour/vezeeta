@@ -180,6 +180,20 @@ namespace Web.Controllers
                     );
             }
 
+            var isExists = await _unitOfWork.Discounts.FindOne(d => d.DoctorId == _currentUser.Id && d.Code == createDiscountDto.Code);
+            if (isExists != null)
+            {
+                return
+                    BadRequest(
+                        new
+                        {
+                            success = false,
+                            statusCode = 400,
+                            message = "you have already a discount with the same code",
+                        }
+                    );
+            }
+
             var discount = createDiscountDto.ToDiscount(_currentUser.Id);
             var createdDiscount = await _unitOfWork.Discounts.Create(discount);
             await _unitOfWork.Complete();
@@ -292,6 +306,7 @@ namespace Web.Controllers
                     );
             }
 
+            var activatedDiscountDto = activatedDiscount.ToDiscountDto();
             return Ok(
                 new
                 {
@@ -300,7 +315,7 @@ namespace Web.Controllers
                     message = "discount is activated successfully",
                     data = new
                     {
-                        discount = activatedDiscount,
+                        discount = activatedDiscountDto,
                     }
                 }
             );
@@ -382,6 +397,8 @@ namespace Web.Controllers
                     );
             }
 
+            var deactivatedDiscountDto = deactivatedDiscount.ToDiscountDto();
+
             return Ok(
                 new
                 {
@@ -390,7 +407,7 @@ namespace Web.Controllers
                     message = "discount is activated successfully",
                     data = new
                     {
-                        discount = deactivatedDiscount,
+                        discount = deactivatedDiscountDto,
                     }
                 }
             );
