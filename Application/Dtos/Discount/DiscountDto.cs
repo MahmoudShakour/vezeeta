@@ -2,18 +2,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Core.Enums;
+using Application.Dtos.Doctor;
 
-namespace Core.Models
+namespace Application.Dtos.Discount
 {
-    public class Discount
+    public class DiscountDto
     {
         public int Id { get; set; }
         public int Percentage { get; set; }
         public string DoctorId { get; set; } = string.Empty;
-        public Doctor Doctor { get; set; }
         public string Code { get; set; } = string.Empty;
-        public DiscountStatus Status { get; set; } = DiscountStatus.Activated;
-        public List<PatientDiscount> PatientDiscounts { get; set; } = [];
+        public string Status { get; set; } = string.Empty;
     }
 }
