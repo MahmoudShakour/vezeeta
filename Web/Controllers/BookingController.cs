@@ -6,6 +6,7 @@ using Application.Dtos.Booking;
 using Application.Interfaces.Helpers;
 using Application.Interfaces.Repos;
 using Application.Mappers;
+using Core.Enums;
 using Infrastructure.Helpers;
 using Microsoft.AspNetCore.Mvc;
 
@@ -146,7 +147,7 @@ namespace Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] CreateBookingDto createBookingDto)
+        public async Task<IActionResult> Create([FromQuery] string? couponCode, [FromBody] CreateBookingDto createBookingDto)
         {
             if (_currentUser == null)
             {
@@ -175,7 +176,7 @@ namespace Web.Controllers
                     );
             }
 
-            var appointment = await _unitOfWork.Appointments.FindOne(a => a.Id == createBookingDto.AppointmentId, ["Booking"]);
+            var appointment = await _unitOfWork.Appointments.FindOne(a => a.Id == createBookingDto.AppointmentId, ["Booking", "Doctor"]);
             if (appointment == null)
             {
                 return
@@ -201,7 +202,21 @@ namespace Web.Controllers
                        }
                    );
             }
-            var booking = createBookingDto.ToBooking(_currentUser.Id);
+
+            decimal cost = appointment.Doctor.Fees;
+
+
+            if (couponCode != null)
+            {
+                var discount = await _unitOfWork.Discounts.FindOne(d => d.Code == couponCode);
+                if (discount != null && discount.Status == DiscountStatus.Activated && discount.DoctorId == appointment?.DoctorId)
+                {
+                    cost -= (discount.Percentage / 100.0m) * cost;
+                }
+            }
+
+
+            var booking = createBookingDto.ToBooking(_currentUser.Id, cost);
             var createdBooking = await _unitOfWork.Bookings.Create(booking);
             await _unitOfWork.Complete();
 
