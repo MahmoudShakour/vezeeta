@@ -9,5 +9,6 @@ namespace Application.Interfaces.Repos
     public interface IDoctorRepo:IBaseRepo<Doctor,string>
     {
         Task<Doctor?> Update(Doctor doctor);
+        Task<List<(string,int)>> GetTop(int numberOfDoctors);
     }
 }

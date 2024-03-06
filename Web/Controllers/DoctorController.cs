@@ -46,8 +46,20 @@ namespace Web.Controllers
         [HttpGet("top")]
         public async Task<IActionResult> GetTop([FromQuery] int numberOfDoctors)
         {
-            // TODO
-            return Ok();
+            var topDoctors = await _unitOfWork.Doctors.GetTop(numberOfDoctors);
+            var doctors = topDoctors.Select(d => new { doctorId = d.Item1, count = d.Item2 }).ToList();
+            return Ok(
+                new
+                {
+                    success = true,
+                    statusCode = 200,
+                    message = "top doctors returned successfully",
+                    data = new
+                    {
+                        doctors
+                    }
+                }
+            );
         }
 
         [HttpGet]
