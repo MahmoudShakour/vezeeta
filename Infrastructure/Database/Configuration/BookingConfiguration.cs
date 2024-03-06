@@ -13,39 +13,42 @@ namespace Infrastructure.Database.Configuration
         public void Configure(EntityTypeBuilder<Booking> builder)
         {
             builder
-                .HasKey(b=>b.Id);
-            
+                .HasKey(b => b.Id);
+
             builder
-                .HasOne(b=>b.Appointment)
-                .WithOne(a=>a.Booking)
+                .HasOne(b => b.Appointment)
+                .WithOne(a => a.Booking)
                 .OnDelete(DeleteBehavior.Restrict);
-            
+
             builder
-                .HasIndex(b=>b.AppointmentId)
+                .HasIndex(b => b.AppointmentId)
                 .IsUnique();
-            
+
             builder
-                .HasOne(b=>b.Patient)
-                .WithMany(p=>p.Bookings)
+                .HasOne(b => b.Patient)
+                .WithMany(p => p.Bookings)
                 .OnDelete(DeleteBehavior.Restrict);
-            
+
             builder
-                .Property(b=>b.AppointmentId)
-                .IsRequired();
-            
-            builder
-                .Property(b=>b.PatientId)
-                .IsRequired();
-            
-            builder
-                .Property(b=>b.Status)
-                .HasConversion<string>()
-                .IsRequired();
-            
-            builder
-                .Property(b=>b.CreatedAt)
+                .Property(b => b.AppointmentId)
                 .IsRequired();
 
+            builder
+                .Property(b => b.PatientId)
+                .IsRequired();
+
+            builder
+                .Property(b => b.Status)
+                .HasConversion<string>()
+                .IsRequired();
+
+            builder
+                .Property(b => b.CreatedAt)
+                .IsRequired();
+
+            builder
+                .Property(b => b.Cost)
+                .IsRequired();
         }
     }
 }

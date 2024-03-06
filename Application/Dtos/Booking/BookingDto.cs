@@ -17,5 +17,6 @@ namespace Application.Dtos.Booking
         public PatientDto Patient { get; set; }
         public string Status { get; set; } = BookingStatus.Pending.ToString();
         public DateTime AppointmentDate { get; set; }
+        public decimal Cost { get; set; }
     }
 }
