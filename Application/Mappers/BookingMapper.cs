@@ -9,12 +9,13 @@ namespace Application.Mappers
 {
     public static class BookingMapper
     {
-        public static Booking ToBooking(this CreateBookingDto createBookingDto, string patientId)
+        public static Booking ToBooking(this CreateBookingDto createBookingDto, string patientId, decimal cost)
         {
             return new Booking
             {
                 AppointmentId = createBookingDto.AppointmentId,
                 PatientId = patientId,
+                Cost = cost
             };
         }
 
@@ -24,10 +25,11 @@ namespace Application.Mappers
             {
                 Id = booking.Id,
                 AppointmentId = booking.AppointmentId,
-                Doctor=booking.Appointment.Doctor.ToDoctorDto(),
+                Doctor = booking.Appointment.Doctor.ToDoctorDto(),
                 Patient = booking.Patient.ToPatientDto(),
                 Status = booking.Status.ToString(),
                 AppointmentDate = booking.Appointment.Date,
+                Cost = booking.Cost,
             };
         }
     }

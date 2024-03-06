@@ -15,5 +15,6 @@ namespace Core.Models
         public Patient Patient { get; set; }
         public BookingStatus Status { get; set; } = BookingStatus.Pending;
         public DateTime CreatedAt { get; set; } = DateTime.Now;
+        public decimal Cost { get; set; }
     }
 }
